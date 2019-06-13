@@ -20,7 +20,7 @@
 
 
 
-![](https://github.com/andyxialm/KMPAutoCompleteTextView/blob/master/art/Screenshot_sample_sajjad.png?raw=true)
+![](https://raw.githubusercontent.com/yosefi1988/KMPAutoCompleteTextView/master/art/Screenshot_sample_sajjad.png?raw=true)
 
 
 #License
