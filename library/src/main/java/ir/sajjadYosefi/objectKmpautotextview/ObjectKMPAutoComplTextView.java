@@ -14,7 +14,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -107,7 +106,7 @@ public class ObjectKMPAutoComplTextView extends android.support.v7.widget.AppCom
      *
      * @param strings
      */
-    public void setDatas(final List<String> strings) {
+    public void setDatas(final List<ItemData> strings) {
         mAdapter = new KMPAdapter(getContext(), getResultDatas(strings));
         setAdapter(mAdapter);
     }
@@ -121,6 +120,7 @@ public class ObjectKMPAutoComplTextView extends android.support.v7.widget.AppCom
                     return;
                 }
                 mListener.onPopupItemClick(ObjectKMPAutoComplTextView.this.getText().toString());
+//                mListener.onPopupItemClick(mSourceDatas.get(position).mTarget.getText());
             }
         });
 
@@ -133,9 +133,9 @@ public class ObjectKMPAutoComplTextView extends android.support.v7.widget.AppCom
         }
 
         List<PopupTextBean> newDatas = new ArrayList<PopupTextBean>();
-        List<String> newDataStrings = new ArrayList<String>();
+        List<ItemData> newDataStrings = new ArrayList<ItemData>();
         for (PopupTextBean resultBean : datas) {
-            int matchIndex = matchString(resultBean.mTarget, input, mIsIgnoreCase);
+            int matchIndex = matchString(resultBean.mTarget.text, input, mIsIgnoreCase);
             if (-1 != matchIndex) {
                 PopupTextBean bean = new PopupTextBean(resultBean.mTarget, matchIndex, matchIndex + input.length());
                 newDatas.add(bean);
@@ -152,19 +152,19 @@ public class ObjectKMPAutoComplTextView extends android.support.v7.widget.AppCom
     }
 
 
-    private List<String> getResultDatas(List<String> strings) {
-        if (strings == null || strings.size() == 0) {
+    private List<ItemData> getResultDatas(List<ItemData> itemData) {
+        if (itemData == null || itemData.size() == 0) {
             return null;
         }
 
         List<PopupTextBean> list = new ArrayList<PopupTextBean>();
-        for (String target : strings) {
+        for (ItemData target : itemData) {
             list.add(new PopupTextBean(target));
         }
 
         mSourceDatas = new ArrayList<PopupTextBean>();
         mSourceDatas.addAll(list);
-        return strings;
+        return itemData;
     }
 
     public void setMatchIgnoreCase(boolean ignoreCase) {
@@ -176,14 +176,16 @@ public class ObjectKMPAutoComplTextView extends android.support.v7.widget.AppCom
     }
 
     class KMPAdapter extends BaseAdapter implements Filterable {
-        private List<String> mList;
+        private List<ItemData> mList;
         private Context mContext;
         private MyFilter mFilter;
 
-        public KMPAdapter(Context context, List<String> list) {
+        public KMPAdapter(Context context, List<ItemData> list) {
             mContext = context;
-            mList = new ArrayList<String>();
-            mList.addAll(list);
+            mList = new ArrayList<ItemData>();
+
+            if (list != null)
+                mList.addAll(list);
         }
 
         @Override
@@ -193,7 +195,7 @@ public class ObjectKMPAutoComplTextView extends android.support.v7.widget.AppCom
 
         @Override
         public Object getItem(int position) {
-            return mList == null ? null : mList.get(position);
+            return mList == null ? null : mList.get(position).getText();
         }
 
         @Override
@@ -219,7 +221,7 @@ public class ObjectKMPAutoComplTextView extends android.support.v7.widget.AppCom
             }
 
             PopupTextBean bean = mTempDatas.get(position);
-            SpannableString ss = new SpannableString(bean.mTarget);
+            SpannableString ss = new SpannableString(bean.mTarget.getText());
             holder.tv.setTextColor(mTextColor == null ? DEFAULT_TEXTCOLOR : mTextColor.getDefaultColor());
             holder.tv.setTextSize(mTextSize == 0 ? DEFAULT_TEXT_PIXEL_SIZE : DisplayUtils.px2sp(getContext(), mTextSize));
 
@@ -229,7 +231,7 @@ public class ObjectKMPAutoComplTextView extends android.support.v7.widget.AppCom
                         bean.mStartIndex, bean.mEndIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 holder.tv.setText(ss);
             } else {
-                holder.tv.setText(bean.mTarget);
+                holder.tv.setText(bean.mTarget.getText());
             }
 
             return convertView;
@@ -253,7 +255,7 @@ public class ObjectKMPAutoComplTextView extends android.support.v7.widget.AppCom
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults results = new FilterResults();
                 if (mList == null) {
-                    mList = new ArrayList<String>();
+                    mList = new ArrayList<ItemData>();
                 }
                 results.values = mList;
                 results.count = mList.size();

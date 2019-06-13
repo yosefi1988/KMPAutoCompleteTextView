@@ -3,23 +3,23 @@ package ir.sajjadYosefi.objectKmpautotextview;
 import java.io.Serializable;
 
 public class PopupTextBean implements Serializable {
-    public String mTarget;
+    public ItemData mTarget;
     public int mStartIndex = -1;
     public int mEndIndex = -1;
 
-    public PopupTextBean(String target) {
+    public PopupTextBean(ItemData target) {
         this.mTarget = target;
     }
 
-    public PopupTextBean(String target, int startIndex) {
-        this.mTarget = target;
+    public PopupTextBean(ItemData itemData, int startIndex) {
+        this.mTarget = itemData;
         this.mStartIndex = startIndex;
         if (-1 != startIndex) {
-            this.mEndIndex = startIndex + target.length();
+            this.mEndIndex = startIndex + itemData.getText().length();
         }
     }
 
-    public PopupTextBean(String target, int startIndex, int endIndex) {
+    public PopupTextBean(ItemData target, int startIndex, int endIndex) {
         this.mTarget = target;
         this.mStartIndex = startIndex;
         this.mEndIndex = endIndex;
