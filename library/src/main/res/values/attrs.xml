@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="KMPAutoComplTextView">
+    <declare-styleable name="ObjectKMPAutoComplTextView">
         <attr name="completionHighlightColor" format="reference|color" />
         <attr name="completionTextColor" format="reference|color" />
         <attr name="completionTextSize" format="dimension" />

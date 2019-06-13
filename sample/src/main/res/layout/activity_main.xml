@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
-    <cn.refactor.kmpautotextview.KMPAutoComplTextView
+    <ir.sajjadYosefi.objectKmpautotextview.ObjectKMPAutoComplTextView
         android:id="@+id/tvAutoCompl"
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"

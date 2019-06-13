@@ -1,4 +1,4 @@
-package cn.refactor.kmpautotextview;
+package ir.sajjadYosefi.objectKmpautotextview;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -29,7 +29,7 @@ import java.util.List;
  * 邮箱 : andyxialm@gmail.com
  * 描述 : 实现KMP算法的AutoCompleteTextView, 用于字符串模糊匹配
  */
-public class KMPAutoComplTextView extends AutoCompleteTextView {
+public class ObjectKMPAutoComplTextView extends android.support.v7.widget.AppCompatAutoCompleteTextView {
 
     private static final int DEFAULT_HIGHLIGHT       = Color.parseColor("#FF4081");
     private static final int DEFAULT_TEXTCOLOR       = Color.parseColor("#80000000");
@@ -43,26 +43,26 @@ public class KMPAutoComplTextView extends AutoCompleteTextView {
     private List<PopupTextBean> mSourceDatas, mTempDatas;
     private OnPopupItemClickListener mListener;
 
-    public KMPAutoComplTextView(Context context) {
+    public ObjectKMPAutoComplTextView(Context context) {
         this(context, null);
     }
 
-    public KMPAutoComplTextView(Context context, AttributeSet attrs) {
+    public ObjectKMPAutoComplTextView(Context context, AttributeSet attrs) {
         this(context, attrs, android.R.attr.autoCompleteTextViewStyle);
     }
 
-    public KMPAutoComplTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ObjectKMPAutoComplTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
 
     private void init(Context context, AttributeSet attrs) {
         if (attrs != null) {
-            final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.KMPAutoComplTextView);
-            mTextColor = a.getColorStateList(R.styleable.KMPAutoComplTextView_completionTextColor);
-            mHighLightColor = a.getColorStateList(R.styleable.KMPAutoComplTextView_completionHighlightColor);
-            mTextSize = a.getDimensionPixelSize(R.styleable.KMPAutoComplTextView_completionTextSize, DEFAULT_TEXT_PIXEL_SIZE);
-            mIsIgnoreCase = a.getBoolean(R.styleable.KMPAutoComplTextView_completionIgnoreCase, false);
+            final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ObjectKMPAutoComplTextView);
+            mTextColor = a.getColorStateList(R.styleable.ObjectKMPAutoComplTextView_completionTextColor);
+            mHighLightColor = a.getColorStateList(R.styleable.ObjectKMPAutoComplTextView_completionHighlightColor);
+            mTextSize = a.getDimensionPixelSize(R.styleable.ObjectKMPAutoComplTextView_completionTextSize, DEFAULT_TEXT_PIXEL_SIZE);
+            mIsIgnoreCase = a.getBoolean(R.styleable.ObjectKMPAutoComplTextView_completionIgnoreCase, false);
             a.recycle();
         }
         initListener();
@@ -91,12 +91,12 @@ public class KMPAutoComplTextView extends AutoCompleteTextView {
         matchResult(input);
 
         if (mAdapter.mList.size() == 0) {
-            KMPAutoComplTextView.this.dismissDropDown();
+            ObjectKMPAutoComplTextView.this.dismissDropDown();
             return;
         }
         mAdapter.notifyDataSetChanged();
 
-        if (!KMPAutoComplTextView.this.isPopupShowing() || mAdapter.mList.size() > 0) {
+        if (!ObjectKMPAutoComplTextView.this.isPopupShowing() || mAdapter.mList.size() > 0) {
             showDropDown();
         }
 
@@ -120,7 +120,7 @@ public class KMPAutoComplTextView extends AutoCompleteTextView {
                 if (mListener == null) {
                     return;
                 }
-                mListener.onPopupItemClick(KMPAutoComplTextView.this.getText().toString());
+                mListener.onPopupItemClick(ObjectKMPAutoComplTextView.this.getText().toString());
             }
         });
 

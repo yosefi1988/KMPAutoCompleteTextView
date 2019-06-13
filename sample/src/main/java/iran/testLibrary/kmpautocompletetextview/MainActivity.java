@@ -1,4 +1,4 @@
-package cn.refactor.kmpautocompletetextview;
+package iran.testLibrary.kmpautocompletetextview;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +7,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.refactor.kmpautotextview.KMPAutoComplTextView;
+import ir.sajjadYosefi.objectKmpautotextview.ObjectKMPAutoComplTextView;
 
 
 /**
@@ -24,13 +24,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         List<String> data = new ArrayList<String>();
-        data.add("Red roses for wedding");
-        data.add("Bouquet with red roses");
-        data.add("Single red rose flower");
+        data.add("سجاد یوسفی یک");
+        data.add("سجاد یوسفی دو");
+        data.add("سجاد یوسفی سه");
 
-        KMPAutoComplTextView complTextView = (KMPAutoComplTextView) findViewById(R.id.tvAutoCompl);
+        ObjectKMPAutoComplTextView complTextView = (ObjectKMPAutoComplTextView) findViewById(R.id.tvAutoCompl);
         complTextView.setDatas(data);
-        complTextView.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
+        complTextView.setOnPopupItemClickListener(new ObjectKMPAutoComplTextView.OnPopupItemClickListener() {
             @Override
             public void onPopupItemClick(CharSequence charSequence) {
                 Toast.makeText(MainActivity.this, charSequence.toString(), Toast.LENGTH_SHORT).show();
