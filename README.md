@@ -1,11 +1,13 @@
-#AutoCompleteTextView
-### KMP Algorithm
+#CustomAutoCompleteTextView (powered by sajjad yosefi)
+### Object KMP Algorithm
 
-* 自动补全TextView
-* 支持搜索字符高亮显示
-* 支持源字符串的子串查找, 弥补原生AutoCompleteTextView startWith()的不足
-* 使用KMP算法提升查找性能.
+همیشه قرار نیست در یک لیست متن قرار بگیرد
+گاهی متن ها فقط برای نمایش هستند و کد آن متن برای ما مهم تر هسش
+برای این کار باید به جای نوع داده ای متنی از نوع دیگری استفاده کرد
 
+ما این کتابخانه را سفارشی کردیم که شما علاوه بر متنی که قرار است نمایش بدهید
+مقداری نیز به عنوان id ذخیره کنید
+همچنین مقدار دیگری نیز به عنوان metaData ذخیره کنید
 
 
 |attr|format|description|
@@ -18,7 +20,7 @@
 
 
 
-![](https://github.com/andyxialm/KMPAutoCompleteTextView/blob/master/art/Screenshot_sample.png?raw=true)
+![](https://github.com/andyxialm/KMPAutoCompleteTextView/blob/master/art/Screenshot_sample_sajjad.png?raw=true)
 
 
 #License
