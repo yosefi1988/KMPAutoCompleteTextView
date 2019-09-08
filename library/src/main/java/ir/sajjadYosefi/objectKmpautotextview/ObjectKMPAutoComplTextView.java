@@ -67,22 +67,23 @@ public class ObjectKMPAutoComplTextView extends android.support.v7.widget.AppCom
         initListener();
     }
 
+    TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            onInputTextChanged(s.toString());
+        }
+    };
     private void initListener() {
 
-        addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                onInputTextChanged(s.toString());
-            }
-        });
+        addTextChangedListener(textWatcher);
 
     }
 
@@ -106,10 +107,63 @@ public class ObjectKMPAutoComplTextView extends android.support.v7.widget.AppCom
      *
      * @param strings
      */
-    public void setDatas(final List<ItemData> strings) {
-        mAdapter = new KMPAdapter(getContext(), getResultDatas(strings));
+
+    List<ItemData> itemDataList;
+    public void setDatas(final List<ItemData> datas) {
+        this.itemDataList = datas;
+        mAdapter = new KMPAdapter(getContext(), getResultDatas(itemDataList));
         setAdapter(mAdapter);
     }
+
+    public void setText(String text){
+        this.removeTextChangedListener(textWatcher);
+        this.setText(text.toString());
+        this.addTextChangedListener(textWatcher);
+    }
+
+    public int getPosition(String text){
+        int index = 0 ;
+        for (ItemData itemData : itemDataList) {
+            if (itemData.getText().equals(text)){
+                return index;
+            }
+            index++;
+        }
+        return index;
+    }
+
+    public ItemData getPosition(int position){
+        return itemDataList.get(position);
+    }
+
+    public String getMetaData(String text){
+        for (ItemData itemData : itemDataList) {
+            if (itemData.getText().equals(text)){
+                return itemData.getMeta();
+            }
+        }
+        return null;
+    }
+
+    public ItemData getItemData(String text){
+        for (ItemData itemData : itemDataList) {
+            if (itemData.getText().equals(text)){
+                return itemData;
+            }
+        }
+        return null;
+    }
+
+    public String getImage(String text){
+        for (ItemData itemData : itemDataList) {
+            if (itemData.getText().equals(text)){
+                return itemData.getImageId();
+            }
+        }
+        return null;
+    }
+
+
 
     public void setOnPopupItemClickListener(OnPopupItemClickListener listener) {
         mListener = listener;
